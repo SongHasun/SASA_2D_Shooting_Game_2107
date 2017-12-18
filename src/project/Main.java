@@ -10,6 +10,7 @@ import java.awt.geom.Line2D;
 /*도움을 주고받은 친구*/
 //김지훈에게 도움을 줌. 배열과 for문을 이용해서 코드 중복 해결.
 //권순현에게 도움을 받음. 자바 프로그램에 이미지 파일 저장 및 불러와서 쓰기.
+//노정훈에게 도움을 받음. github에 업로드하기.
 
 /*목차*/
 //시작 Main 구현, 이니셜라이저, run 메소드
@@ -330,11 +331,11 @@ public class Main extends JFrame implements Runnable, KeyListener, MouseMotionLi
         for (Enemy e : enemyList) {
             boolean flag = true; //기본적으로 발각을 가정한다.
             for (int j = 0; j < dx.length; j++) {
-                int[] xpoints = {(int) e.x + dx[j], (int) player.x + dx[j]};
-                int[] ypoints = {(int) e.y + dy[j], (int) player.y + dy[j]};
+                int[] xpoints = {(int) e.x + dx[j], (int) player.x + dx[j]+((int)e.x==(int)player.x?1:0)};//두 x좌표가 같을 때 에러가 발생했다. 이런 상황을 막아주기 위해, 같을 경우 한쪽에 1을 더해준다.
+                int[] ypoints = {(int) e.y + dy[j], (int) player.y + dy[j]+((int)e.y==(int)player.y?1:0)};
                 Polygon p = new Polygon(xpoints, ypoints, 2);//Polygon 클래스를 이용하여 직선 객체를 만들었다.
                 for (Rectangle w : wallList) {//모든 벽에 대해, 벽이 시야를 막는지 확인한다.
-                    if (p.intersects(w)) {//Polygon 직선과 Rect가 교차하는지 확인한다. 간혹 에러가 발생한다. 원인은 파악하지 못했다.
+                    if (p.intersects(w)) {//Polygon 직선과 Rect가 교차하는지 확인한다. .
                         e.ableToSee(false); //이 적(e)은 플레이어를 발견했다.
                         flag = false;//하나의 벽이라도 막고 있으면 발각된 것이 아니다.
                     }
