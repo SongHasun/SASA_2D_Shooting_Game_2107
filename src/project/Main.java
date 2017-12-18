@@ -77,8 +77,7 @@ public class Main extends JFrame implements Runnable, KeyListener, MouseMotionLi
         player.dead = false;
         player.img=new ImageIcon("C:\\Users\\송하선\\Desktop\\java_resource\\soldier11.png");
         player.genN = 6;
-        player.weapon.n=player.weapon.maxN;
-        player.weapon.totN=player.weapon.maxN*2;
+        player.setWeapon(new Weapon());//무기를 해제한다. nullPointer 에러를 막기 위해 기본 무기를 넣는다. StageSetter에서 새로운 무기가 입력된다.
         //이전 스테이지의 적, 총알을 모두 제거한다.
         enemyList.clear();
         bulletList.clear();
